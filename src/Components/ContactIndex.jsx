@@ -9,6 +9,36 @@ import FavoriteContacts from "./FavoriteContacts";
 import GeneralContacts from "./GeneralContacts";
 
 class ContactIndex extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state={
+            contactList:[
+                {
+                    id:1,
+                    name:"Chrisanthi Mihelioudakis",
+                    email:"chris.mdks@gmail.com",
+                    phone:"(+30)69XXXXXXXX",
+                    isFavorite:false
+                },
+                {
+                    id:2,
+                    name:"Ben Smith",
+                    email:"bensm@email.com",
+                    phone:"(+30)69XXXXXXXX",
+                    isFavorite:true
+                },
+                {
+                    id:3,
+                    name:"Kate Miller",
+                    email:"kmiller@email.com",
+                    phone:"(+30)69XXXXXXXX",
+                    isFavorite:true
+                }
+            ]
+        }
+    }
+
     render(){
         return(
             <div>
@@ -26,10 +56,18 @@ class ContactIndex extends React.Component {
                         <AddContact/>
                     </div>
                     <div className="row py-2">
-                        <FavoriteContacts/>
+                    <span className="text-white">Favorite Contacts:</span>
+                        <FavoriteContacts 
+                            contacts={this.state.contactList.filter(
+                                (u) => u.isFavorite === true
+                            )}/>
                     </div>
                     <div className="row py-2">
-                        <GeneralContacts/>
+                        <span className="text-white">General Contacts:</span>
+                        <GeneralContacts 
+                            contacts={this.state.contactList.filter(
+                                (u) => u.isFavorite === false
+                            )}/>
                     </div>
                 </div>
                 <Footer/>
