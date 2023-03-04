@@ -1,4 +1,4 @@
-import logo192 from "../Images/logo192.png"
+import logo192 from "../../Images/logo192.png"
 
 function Header() {
     return(
