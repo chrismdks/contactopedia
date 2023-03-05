@@ -22,22 +22,22 @@ const Contact = (props) => {
                     <i class="bi bi-star" style={{fontSize:"1rem"}}></i>
                 </button>
             </div>
-            {/*Edit-Contact button*/}
+            
             <div className="col-2 col-md-2 pt-md-3">
+                {/*Edit-Contact button*/} 
                 <button className={`btn btn-sm m-1 ${
                     props.contact.isFavorite?"btn-primary":"btn-outline-primary"}`
                 }>
                     <i class="bi bi-pencil-square" style={{fontSize:"1rem"}}></i>
                 </button>
-            </div>
-            {/*Delete-Contact button*/}
-            <div className="col-2 col-md-2 pt-md-3">
+                {/*Delete-Contact button*/}
                 <button className={`btn btn-sm m-1 ${
                     props.contact.isFavorite?"btn-danger":"btn-outline-danger"}`
                 }>
                     <i class="bi bi-trash3" style={{fontSize:"1rem"}}></i>
                 </button>
             </div>
+            
             <button className="btn btn-secondary form-control">
                 Call {props.contact.name}
             </button>
