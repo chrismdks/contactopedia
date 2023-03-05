@@ -22,6 +22,14 @@ const Contact = (props) => {
                     <i class="bi bi-star" style={{fontSize:"1rem"}}></i>
                 </button>
             </div>
+            {/*Edit-Contact button*/}
+            <div className="col-2 col-md-2 pt-md-3">
+                <button className={`btn btn-sm m-1 ${
+                    props.contact.isFavorite?"btn-primary":"btn-outline-primary"}`
+                }>
+                    <i class="bi bi-pencil-square" style={{fontSize:"1rem"}}></i>
+                </button>
+            </div>
             {/*Delete-Contact button*/}
             <div className="col-2 col-md-2 pt-md-3">
                 <button className={`btn btn-sm m-1 ${
