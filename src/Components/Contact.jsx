@@ -14,6 +14,14 @@ const Contact = (props) => {
                     {props.contact.phone}
                 </div>
             </div>
+            {/*Favorite & Unfavorite button*/}
+            <div className="col-2 col-md-1 pt-2 pt-md-1">
+                <i class="bi bi-star text-white btn btn-sm m-1"></i>
+            </div>
+            <div className="col-2 col-md-1 pt-2 pt-md-1">
+                <i class="bi bi-star-fill text-white btn btn-sm m-1"></i>
+            </div>
+            
             <button className="btn btn-secondary form-control">
                 Call {props.contact.name}
             </button>
