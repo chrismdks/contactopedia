@@ -15,13 +15,14 @@ const Contact = (props) => {
                 </div>
             </div>
             {/*Favorite & Unfavorite button*/}
-            <div className="col-2 col-md-1 pt-2 pt-md-1">
-                <i class="bi bi-star text-white btn btn-sm m-1"></i>
+            <div className="col-2 col-md-2 pt-md-3">
+                <button className={`btn btn-sm m-1 ${
+                    props.contact.isFavorite?"btn-warning":"btn-outline-warning"}`
+                }>
+                    <i class="bi bi-star" style={{fontSize:"1rem"}}></i>
+                </button>
             </div>
-            <div className="col-2 col-md-1 pt-2 pt-md-1">
-                <i class="bi bi-star-fill text-white btn btn-sm m-1"></i>
-            </div>
-            
+
             <button className="btn btn-secondary form-control">
                 Call {props.contact.name}
             </button>
