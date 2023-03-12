@@ -26,6 +26,24 @@ class ContactIndex extends React.Component {
         }
     }
 
+    handleAddContact = (newContact) => {
+        //alert("Hello!");
+        const indexOfLastElement = this.state.contactList.length - 1;
+        const id = this.state.contactList[indexOfLastElement].id + 1;
+        const newFinalContact = {
+            id:id,
+            isFavorite:false,
+            name:newContact.name,
+            email:newContact.email,
+            phone:newContact.phone
+        }
+        this.setState((prevState)=>{
+            return{
+                contactList: prevState.contactList.concat([newFinalContact])
+            }
+        })
+    }
+
     render(){
         let generals = this.state.contactList.filter((u) => u.isFavorite === false);
         let favorites = this.state.contactList.filter((u) => u.isFavorite === true);
@@ -49,7 +67,7 @@ class ContactIndex extends React.Component {
 
                     <div className="row py-2">
                         <div className="col-8 offset-2 row">
-                            <AddContact/>
+                            <AddContact handleAddContact = {this.handleAddContact} />
                         </div>
                     </div>
                     
