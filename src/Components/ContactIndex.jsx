@@ -14,28 +14,15 @@ class ContactIndex extends React.Component {
         super(props);
         this.state={
             contactList:[
-                {
-                    id:1,
-                    name:"Chrisanthi Mihelioudakis",
-                    email:"chris.mdks@gmail.com",
-                    phone:"(+30)69XXXXXXXX",
-                    isFavorite:false
-                },
-                {
-                    id:2,
-                    name:"Ben Smith",
-                    email:"bensm@email.com",
-                    phone:"(+30)69XXXXXXXX",
-                    isFavorite:true
-                },
-                {
-                    id:3,
-                    name:"Kate Miller",
-                    email:"kmiller@email.com",
-                    phone:"(+30)69XXXXXXXX",
-                    isFavorite:true
-                }
-            ]
+            {   id:1, isFavorite:false,
+                name:"Chrisanthi Mihelioudakis", email:"chris.mdks@gmail.com", phone:"(+30)69XXXXXXXX"
+            },
+            {   id:2, isFavorite:true,
+                name:"Ben Smith", email:"bensm@email.com", phone:"(+30)69XXXXXXXX"
+            },
+            {   id:3, isFavorite:true,
+                name:"Kate Miller", email:"kmiller@email.com", phone:"(+30)69XXXXXXXX"
+            }]
         }
     }
 
@@ -50,6 +37,7 @@ class ContactIndex extends React.Component {
             <div>
                 <Header/>
                 <div className="container" style={{minHeight:"85vh"}}>
+                    
                     <div className="row py-3">
                         <div className="col-4 offset-2">
                             <AddRandomContact/>
@@ -58,24 +46,32 @@ class ContactIndex extends React.Component {
                             <RemoveAllContacts/>
                         </div>
                     </div>
+
                     <div className="row py-2">
-                        <AddContact/>
+                        <div className="col-8 offset-2 row">
+                            <AddContact/>
+                        </div>
                     </div>
+                    
                     <div className="row py-2">
-                        <span className="text-white">
-                            {hasFavorite ? "Favorite Contacts:" : ""}
-                        </span>
-                        <FavoriteContacts 
-                            contacts={favorites}/>
+                        <div className="col-8 offset-2 row">
+                            <span className="text-white">
+                                {hasFavorite ? "Favorite Contacts:" : ""}
+                            </span>
+                            <FavoriteContacts contacts={favorites}/>
+                        </div>
                     </div>
+
                     <div className="row py-2">
-                        <span className="text-white">
-                            {hasGeneral ? "General Contacts:" : ""}
-                        </span>
-                        <GeneralContacts 
-                            contacts={generals}/>
+                        <div className="col-8 offset-2 row">
+                            <span className="text-white">
+                                {hasGeneral ? "General Contacts:" : ""}
+                            </span>
+                            <GeneralContacts contacts={generals}/>
+                        </div>
                     </div>
                 </div>
+
                 <Footer/>
             </div>
 
