@@ -4,7 +4,7 @@ const FavoriteContacts = (props) => {
     return(
         <div>
             {props.contacts.map((contact,index) => (
-                <Contact contact={contact} key={index}></Contact>
+                <Contact contact={contact} key={index} />
         ))}
         </div>
     )

@@ -40,6 +40,12 @@ class ContactIndex extends React.Component {
     }
 
     render(){
+        let generals = this.state.contactList.filter((u) => u.isFavorite === false);
+        let favorites = this.state.contactList.filter((u) => u.isFavorite === true);
+
+        let hasGeneral = (generals.length > 0);
+        let hasFavorite = (favorites.length > 0);
+
         return(
             <div>
                 <Header/>
@@ -56,18 +62,18 @@ class ContactIndex extends React.Component {
                         <AddContact/>
                     </div>
                     <div className="row py-2">
-                    <span className="text-white">Favorite Contacts:</span>
+                        <span className="text-white">
+                            {hasFavorite ? "Favorite Contacts:" : ""}
+                        </span>
                         <FavoriteContacts 
-                            contacts={this.state.contactList.filter(
-                                (u) => u.isFavorite === true
-                            )}/>
+                            contacts={favorites}/>
                     </div>
                     <div className="row py-2">
-                        <span className="text-white">General Contacts:</span>
+                        <span className="text-white">
+                            {hasGeneral ? "General Contacts:" : ""}
+                        </span>
                         <GeneralContacts 
-                            contacts={this.state.contactList.filter(
-                                (u) => u.isFavorite === false
-                            )}/>
+                            contacts={generals}/>
                     </div>
                 </div>
                 <Footer/>
