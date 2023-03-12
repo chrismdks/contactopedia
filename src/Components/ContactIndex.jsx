@@ -33,9 +33,7 @@ class ContactIndex extends React.Component {
         const newFinalContact = {
             id:id,
             isFavorite:false,
-            name:newContact.name,
-            email:newContact.email,
-            phone:newContact.phone
+            ...newContact
         }
         this.setState((prevState)=>{
             return{
