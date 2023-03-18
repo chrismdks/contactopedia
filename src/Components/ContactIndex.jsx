@@ -27,19 +27,39 @@ class ContactIndex extends React.Component {
     }
 
     handleAddContact = (newContact) => {
-        //alert("Hello!");
-        const indexOfLastElement = this.state.contactList.length - 1;
-        const id = this.state.contactList[indexOfLastElement].id + 1;
-        const newFinalContact = {
-            id:id,
-            isFavorite:false,
-            ...newContact
-        }
-        this.setState((prevState)=>{
-            return{
-                contactList: prevState.contactList.concat([newFinalContact])
+        // 1. Check if all are empty
+        if (newContact.name==="" && newContact.phone==="" && newContact.email==="") 
+            return {status:"failure",msg:"Please enter a contact"};
+        // 1. Check if name is empty
+        if (newContact.name==="") 
+            return {status:"failure",msg:"Please enter a valid name"};
+        // 2. Check if phone is empty
+        if (newContact.phone==="")
+            return {status:"failure",msg:"Please enter a valid phone number"};
+        // 3. Check if contact already exists
+        const isDuplicate = this.state.contactList.filter((x)=>{
+            if(x.name.toLowerCase() === newContact.name.toLowerCase() && x.phone === newContact.phone) {
+                return true;
             }
+            return false;
         })
+        // if (isDuplicate) {...} does not work because filter returns an array, not a value.
+        if(isDuplicate.length > 0) return {status:"failure",msg:"Duplicate contact!"};
+        else {
+            const indexOfLastElement = this.state.contactList.length - 1;
+            const id = this.state.contactList[indexOfLastElement].id + 1;
+            const newFinalContact = {
+                id:id,
+                isFavorite:false,
+                ...newContact
+            }
+            this.setState((prevState)=>{
+                return{
+                    contactList: prevState.contactList.concat([newFinalContact])
+                }
+            })
+            return {status:"success",msg:"Contact added successfully!"};
+        }
     }
 
     render(){
