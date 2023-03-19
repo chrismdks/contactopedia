@@ -26,7 +26,7 @@ class ContactIndex extends React.Component {
         }
     }
 
-    handleAddContact = (newContact) => {
+    validateNewContact = (newContact) => {
         // 1. Check if all are empty
         if (newContact.name==="" && newContact.phone==="" && newContact.email==="") 
             return {status:"failure",msg:"Please enter a contact"};
@@ -45,7 +45,13 @@ class ContactIndex extends React.Component {
         })
         // if (isDuplicate) {...} does not work because filter returns an array, not a value.
         if(isDuplicate.length > 0) return {status:"failure",msg:"Duplicate contact!"};
-        else {
+        
+        return {status:"success",msg:"Contact validated!"};
+    }
+
+    handleAddContact = (newContact) => {
+        const validationObj = this.validateNewContact(newContact);
+        if (validationObj.status==="success") {
             const indexOfLastElement = this.state.contactList.length - 1;
             const id = this.state.contactList[indexOfLastElement].id + 1;
             const newFinalContact = {
@@ -60,6 +66,7 @@ class ContactIndex extends React.Component {
             })
             return {status:"success",msg:"Contact added successfully!"};
         }
+        else return validationObj;
     }
 
     render(){
