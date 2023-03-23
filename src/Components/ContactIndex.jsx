@@ -96,6 +96,14 @@ class ContactIndex extends React.Component {
         this.handleAddContact(newContact);
     }
 
+    handleRemoveAll = () => {
+        this.setState(()=>{
+            return{
+                contactList: []
+            }
+        })
+    }
+
     render(){
         let generals = this.state.contactList.filter((u) => u.isFavorite === false);
         let favorites = this.state.contactList.filter((u) => u.isFavorite === true);
@@ -113,7 +121,7 @@ class ContactIndex extends React.Component {
                             <AddRandomContact handleAddRandomContact = {this.handleAddRandomContact}/>
                         </div>
                         <div className="col-4">
-                            <RemoveAllContacts/>
+                            <RemoveAllContacts handleRemoveAll = {this.handleRemoveAll}/>
                         </div>
                     </div>
 
