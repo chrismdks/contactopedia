@@ -69,6 +69,18 @@ class ContactIndex extends React.Component {
         else return validationObj;
     }
 
+    handleToggleFavorite = (contact) => {
+        this.setState((prevState)=>{
+            return{
+                contactList: prevState.contactList.map((obj)=>{
+                    if (obj.id===contact.id) 
+                        return {...obj, isFavorite: !obj.isFavorite};
+                    else return obj;
+                })
+            }
+        })
+    }
+
     render(){
         let generals = this.state.contactList.filter((u) => u.isFavorite === false);
         let favorites = this.state.contactList.filter((u) => u.isFavorite === true);
@@ -101,7 +113,9 @@ class ContactIndex extends React.Component {
                             <span className="text-white">
                                 {hasFavorite ? "Favorite Contacts:" : ""}
                             </span>
-                            <FavoriteContacts contacts={favorites}/>
+                            <FavoriteContacts 
+                                contacts={favorites} 
+                                favoriteClick = {this.handleToggleFavorite}/>
                         </div>
                     </div>
 
@@ -110,7 +124,9 @@ class ContactIndex extends React.Component {
                             <span className="text-white">
                                 {hasGeneral ? "General Contacts:" : ""}
                             </span>
-                            <GeneralContacts contacts={generals}/>
+                            <GeneralContacts 
+                                contacts={generals} 
+                                favoriteClick = {this.handleToggleFavorite}/>
                         </div>
                     </div>
                 </div>
