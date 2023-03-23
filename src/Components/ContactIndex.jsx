@@ -91,6 +91,11 @@ class ContactIndex extends React.Component {
         })
     }
 
+    /*Passing a new contact through an API*/
+    handleAddRandomContact = (newContact) => {
+        this.handleAddContact(newContact);
+    }
+
     render(){
         let generals = this.state.contactList.filter((u) => u.isFavorite === false);
         let favorites = this.state.contactList.filter((u) => u.isFavorite === true);
@@ -105,7 +110,7 @@ class ContactIndex extends React.Component {
                     
                     <div className="row py-3">
                         <div className="col-4 offset-2">
-                            <AddRandomContact/>
+                            <AddRandomContact handleAddRandomContact = {this.handleAddRandomContact}/>
                         </div>
                         <div className="col-4">
                             <RemoveAllContacts/>
@@ -114,7 +119,7 @@ class ContactIndex extends React.Component {
 
                     <div className="row py-2">
                         <div className="col-8 offset-2 row">
-                            <AddContact handleAddContact = {this.handleAddContact} />
+                            <AddContact handleAddContact = {this.handleAddContact}/>
                         </div>
                     </div>
                     
