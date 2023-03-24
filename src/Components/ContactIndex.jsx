@@ -22,7 +22,9 @@ class ContactIndex extends React.Component {
             },
             {   id:3, isFavorite:true,
                 name:"Kate Miller", email:"kmiller@email.com", phone:"(+30)69XXXXXXXX"
-            }]
+            }],
+            selectedContact: undefined,
+            isUpdating: false
         }
     }
 
@@ -52,13 +54,14 @@ class ContactIndex extends React.Component {
     handleAddContact = (newContact) => {
         const validationObj = this.validateNewContact(newContact);
         if (validationObj.status==="success") {
-            const indexOfLastElement = this.state.contactList.length - 1;
-            const id = this.state.contactList[indexOfLastElement].id + 1;
+            let indexOfLastElement = (this.state.contactList.length - 1);
+            let id = (indexOfLastElement === -1) ? 1 : this.state.contactList[indexOfLastElement].id + 1;
             const newFinalContact = {
                 id:id,
                 isFavorite:false,
                 ...newContact
             }
+            console.log(newFinalContact)
             this.setState((prevState)=>{
                 return{
                     contactList: prevState.contactList.concat([newFinalContact])
@@ -104,6 +107,45 @@ class ContactIndex extends React.Component {
         })
     }
 
+    handleUpdateContact = (contact) => {
+        this.setState(()=>{
+            return{
+                selectedContact: contact,
+                isUpdating: true
+            }
+        })
+    }
+
+    handleCancelUpdateContact = () => {
+        this.setState(()=>{
+            return{
+                selectedContact: undefined,
+                isUpdating: false
+            }
+        })
+    }
+
+    handleUpdateFinal = (selectedContact) => {
+        this.setState((prevState)=>{
+            return{
+                contactList: prevState.contactList.map(obj=>{
+                    if (obj.id===selectedContact.id) {
+                        return {
+                            ...obj,
+                            name: selectedContact.name,
+                            email: selectedContact.email,
+                            phone: selectedContact.phone
+                        };
+                    }
+                    return obj;
+                }),
+                isUpdating: false,
+                selectedContact: undefined
+            }
+        })
+        return {status:"success",msg:"Contact updated successfully!"};
+    }
+
     render(){
         let generals = this.state.contactList.filter((u) => u.isFavorite === false);
         let favorites = this.state.contactList.filter((u) => u.isFavorite === true);
@@ -127,7 +169,12 @@ class ContactIndex extends React.Component {
 
                     <div className="row py-2">
                         <div className="col-8 offset-2 row">
-                            <AddContact handleAddContact = {this.handleAddContact}/>
+                            <AddContact 
+                            selectedContact={this.state.selectedContact} 
+                            isUpdating={this.state.isUpdating} 
+                            handleAddContact = {this.handleAddContact}
+                            cancelClick = {this.handleCancelUpdateContact}
+                            updateClick = {this.handleUpdateFinal}/>
                         </div>
                     </div>
                     
@@ -139,7 +186,8 @@ class ContactIndex extends React.Component {
                             <FavoriteContacts 
                                 contacts={favorites} 
                                 favoriteClick = {this.handleToggleFavorite}
-                                deleteClick = {this.handleDeleteContact}/>
+                                deleteClick = {this.handleDeleteContact} 
+                                updateClick = {this.handleUpdateContact}/>
                         </div>
                     </div>
 
@@ -151,7 +199,8 @@ class ContactIndex extends React.Component {
                             <GeneralContacts 
                                 contacts={generals} 
                                 favoriteClick = {this.handleToggleFavorite}
-                                deleteClick = {this.handleDeleteContact}/>
+                                deleteClick = {this.handleDeleteContact} 
+                                updateClick = {this.handleUpdateContact}/>
                         </div>
                     </div>
                 </div>
